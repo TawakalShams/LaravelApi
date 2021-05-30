@@ -7,14 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehiclesModel extends Model
 {
-    use HasFactory;
-     protected $table='vehicles';
-   // public    $primarykey='agentid';
-    public $timestamps = false;
-    protected $primaryKey = 'platenumber';
-    protected $fillable=[
-    		'platenumber',
-    		'type',
-    		'created_by',
-    ];
+  use HasFactory;
+  protected $table = 'vehicles';
+  public $timestamps = false;
+  protected $primaryKey = 'vehicleid';
+  protected $fillable = [
+    'platenumber',
+    'type',
+    'created_by',
+  ];
 }

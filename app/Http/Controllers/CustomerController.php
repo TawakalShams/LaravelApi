@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Customers; //this is a model
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    // public function index()
+    // {
+    //     return response()->json([
+    //         'customers' => Customers::all(),
+    //     ], 200);
+    // }
     public function index()
     {
         return response()->json([
-            'customers' => Customers::all(),
+            'customers' =>
+            DB::table('vehicles')
+                ->select('*')
+                ->join('customers', 'customers.vehicleid', '=', 'vehicles.vehicleid')
+                // ->join('insuarance', 'insuarance.vehicleid', '=', 'vehicles.vehicleid')
+                ->get()
         ], 200);
     }
 
@@ -32,7 +44,7 @@ class CustomerController extends Controller
                 'dob'             => 'required',
                 'address'         => 'required',
                 'phone'           => 'required',
-                'platenumber'     => 'required',
+                'vehicleid'       => 'required',
                 'created_by'      => 'required',
 
             ]);
@@ -49,8 +61,8 @@ class CustomerController extends Controller
                 $customer->dob = $request->input('dob');
                 $customer->address = $request->input('address');
                 $customer->phone = $request->input('phone');
-                $customer->platenumber = $request->input('platenumber');
-                $customer->created_by = 'Tawakal Shams';
+                $customer->vehicleid = $request->input('vehicleid');
+                $customer->created_by = $request->input('created_by');
                 $customer->save();
 
                 return response()->json([
@@ -58,52 +70,97 @@ class CustomerController extends Controller
                 ], 200);
             }
         }
+    }
 
 
+    public function use(Request $request)
+    {
+        return response()->json($request->agent());
+    }
+    /*
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($customerid)
+    {
+        return response()->json([
+            'customers' => Customers::find($customerid),
+        ], 200);
+    }
 
-        // public function update(Request $request, $customerid)
-        // {
-        //         $validation = Validator::make($request->all(),[ 
-        //         'fullName'  	  => 'required',
-        //         'gender'    	  => 'required',
-        //         'dob'       	  => 'required',
-        //         'address'   	  => 'required',
-        //         'phone'     	  => 'required',
-        //         'platenumber'     => 'required',
-        //         'created_by'      => 'required',
-        //     ]);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        //  echo "Edit";
+    }
 
-        //     if($validation->fails()){
-        //         return response()->json([
-        //             'error' => true,
-        //             'messages'  => $validation->errors(),
-        //         ], 200);
-        //     }
-        //     else
-        //     {
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $customerid)
+    {
+        $validation = Validator::make($request->all(), [
+            'fullName'        => 'required',
+            'gender'          => 'required',
+            'dob'             => 'required',
+            'address'         => 'required',
+            'phone'           => 'required',
+            'vehicleid'     => 'required',
+            'created_by'      => 'required',
+        ]);
 
-        //         //$agents = Customer::find($agentid);
-        //         $customer = Customers_model::find($customerid);
+        if ($validation->fails()) {
+            return response()->json([
+                'error' => true,
+                'messages'  => $validation->errors(),
+            ], 200);
+        } else {
 
-        //         $customer->fullName = $request->input('fullName');
-        //         $customer->gender = $request->input('gender');
-        //         $customer->dob = $request->input('dob');
-        //         $customer->address = $request->input('address');
-        //         $customer->phone = $request->input('phone');
-        //         $customer->platenumber = $request->input('platenumber');
-        //         $customer->created_by = $request->input('created_by');
-        //         $customer->save();
+            $customer = Customers::find($customerid);
 
-        //         return response()->json([
-        //             'customer'=> $customer,
-        //         ], 200);
+            $customer->fullName = $request->input('fullName');
+            $customer->gender = $request->input('gender');
+            $customer->dob = $request->input('dob');
+            $customer->address = $request->input('address');
+            $customer->phone = $request->input('phone');
+            $customer->vehicleid = $request->input('vehicleid');
+            $customer->created_by = $request->input('created_by');
+            $customer->save();
 
+            return response()->json([
+                'customers' => $customer,
+            ], 200);
+        }
+    }
 
-        //     }
-        // }
-
-
-
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($customerid)
+    {
+        $customer = Customers::findOrFail($customerid);
+        $customer->delete();
+        if ($customer) {
+            return response()->json([
+                'message' => 'Customer Deleted!'
+            ], 200);
+        } else {
+            return response()->json(null, 204);
+        }
     }
 }

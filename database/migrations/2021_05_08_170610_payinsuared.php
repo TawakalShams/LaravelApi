@@ -16,7 +16,7 @@ class Payinsuared extends Migration
         Schema::create('payinsuared', function (Blueprint $table) {
             // $table->bigIncrements('payid');
             $table->integer('payid', 10);
-            $table->integer('insuaranceid');
+            $table->integer('insuaranceid')->unique();
             $table->foreign('insuaranceid')->references('insuaranceid')->on('insuarance')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('amount');
             $table->string('create_by');

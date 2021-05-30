@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Commission extends Model
+class CustomerPaymentModel extends Model
 {
     use HasFactory;
-    protected $table = 'commission';
+    protected $table = 'payment';
     public $timestamps = false;
-    protected $primaryKey = 'commissionid';
+    protected $primaryKey = 'paymentId';
     protected $fillable = [
-        'agentid',
+        'customerid',
         'amount',
-        'created_by',
+        'create_by'
     ];
 }

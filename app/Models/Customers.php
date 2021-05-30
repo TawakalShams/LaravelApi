@@ -9,7 +9,6 @@ class Customers extends Model
 {
     use HasFactory;
     protected $table = 'customers';
-    // public    $primarykey='agentid';
     public $timestamps = false;
     protected $primaryKey = 'customerid';
     protected $fillable = [

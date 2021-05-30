@@ -14,9 +14,8 @@ class vehicles extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-           // $table->bigIncrements('agentid');
-            // $table->integer('vehiclesid', 10);
-            $table->string('platenumber',50)->primary();
+            $table->integer('vehicleid', 10);
+            $table->string('platenumber')->unique();
             $table->string('type');
             $table->string('created_by');
             $table->timestamp('created_at');

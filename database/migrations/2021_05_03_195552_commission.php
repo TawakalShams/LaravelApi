@@ -14,10 +14,10 @@ class Commission extends Migration
     public function up()
     {
         Schema::create('commission', function (Blueprint $table) {
-            
+
             //$table->bigIncrements('commissionid');
-             $table->integer('commissionid', 10);
-            $table->integer('agentid');
+            $table->integer('commissionid', 10);
+            $table->integer('agentid')->unique();
             $table->foreign('agentid')->references('agentid')->on('agentsregstration')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('amount');

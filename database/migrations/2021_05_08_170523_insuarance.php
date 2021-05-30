@@ -14,13 +14,16 @@ class Insuarance extends Migration
     public function up()
     {
         Schema::create('insuarance', function (Blueprint $table) {
-          //  $table->bigIncrements('insuaranceid');
+            //  $table->bigIncrements('insuaranceid');
             $table->integer('insuaranceid', 10);
-            $table->integer('insuaredid');
-            $table->foreign('insuaredid')->references('insuaredid')->on('insuared')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('platenumber',50);
-            $table->foreign('platenumber')->references('platenumber')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
-
+            // $table->integer('customerid')->unique();
+            //  $table->foreign('customerid')->references('customerid')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('vehicleid')->unique();
+            $table->foreign('vehicleid')->references('vehicleid')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('color');
+            $table->integer('seat');
+            $table->integer('value');
+            $table->date('manufacture');
             $table->date('startdate');
             $table->date('enddate');
             $table->string('create_by');

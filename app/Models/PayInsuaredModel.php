@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Commission extends Model
+class PayInsuaredModel extends Model
 {
     use HasFactory;
-    protected $table = 'commission';
+
+    protected $table = 'payinsuared';
+    // public    $primarykey='agentid';
     public $timestamps = false;
-    protected $primaryKey = 'commissionid';
+    protected $primaryKey = 'payid';
     protected $fillable = [
-        'agentid',
+        'insuaranceid',
         'amount',
-        'created_by',
+        'create_by',
+
     ];
 }

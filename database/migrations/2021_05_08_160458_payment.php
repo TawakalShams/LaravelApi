@@ -14,9 +14,9 @@ class Payment extends Migration
     public function up()
     {
         Schema::create('payment', function (Blueprint $table) {
-           // $table->bigIncrements('paymentId');
+            // $table->bigIncrements('paymentId');
             $table->integer('paymentId', 10);
-            $table->integer('customerid');
+            $table->integer('customerid')->unique();
             $table->foreign('customerid')->references('customerid')->on('customers')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('amount');
             $table->string('create_by');

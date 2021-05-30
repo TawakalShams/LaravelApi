@@ -4,9 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Agent;
+use App\Http\Controllers\VehiclesController;
+use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InsuaranceController;
+use App\Http\Controllers\CustomerPayment;
+use App\Http\Controllers\PayInsuared;
+use App\Http\Controllers\VehiclesPayed;
+use App\Http\Controllers\LoopController;
 
-
-/*
+/*CustomerPayment
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
@@ -32,3 +39,8 @@ Route::group(['middleware' => 'api'], function ($router) {
 Route::resource('/agents', Agent::class);
 Route::resource('/vehicles', VehiclesController::class);
 Route::resource('/customers', CustomerController::class);
+Route::resource('/commission', CommissionController::class);
+Route::resource('/insuarance', InsuaranceController::class);
+Route::resource('/payment', CustomerPayment::class);
+Route::resource('/payinsuared', PayInsuared::class);
+Route::resource('/vehiclesPayed', VehiclesPayed::class);

@@ -97,4 +97,19 @@ class AuthController extends Controller
 
         return response()->json($user, 201);
     }
+
+    function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
+
+    function branch()
+    {
+        return $this->belongsTo('App\Branch');
+    }
+
+    function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
 }

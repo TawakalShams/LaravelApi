@@ -14,15 +14,15 @@ class CustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-           // $table->bigIncrements('customerid');
+            // $table->bigIncrements('customerid');
             $table->integer('customerid', 10);
             $table->string('fullName');
             $table->string('gender');
             $table->date('dob');
             $table->string('address');
             $table->string('phone');
-            $table->string('platenumber',50);
-            $table->foreign('platenumber')->references('platenumber')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('vehicleid')->unique();
+            $table->foreign('vehicleid')->references('vehicleid')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->string('created_by');
             $table->timestamp('created_at');
         });
