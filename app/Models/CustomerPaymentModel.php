@@ -10,7 +10,7 @@ class CustomerPaymentModel extends Model
     use HasFactory;
     protected $table = 'payment';
     public $timestamps = false;
-    protected $primaryKey = 'paymentId';
+    protected $primaryKey = 'customerid';
     protected $fillable = [
         'customerid',
         'amount',

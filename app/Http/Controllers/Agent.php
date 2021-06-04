@@ -58,6 +58,7 @@ class Agent extends Controller
                 'branch'     => 'required',
                 'phone'      => 'required',
                 // 'created_by' => 'required',
+
             ]);
 
             if ($validation->fails()) {

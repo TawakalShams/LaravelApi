@@ -11,7 +11,7 @@ use App\Http\Controllers\InsuaranceController;
 use App\Http\Controllers\CustomerPayment;
 use App\Http\Controllers\PayInsuared;
 use App\Http\Controllers\VehiclesPayed;
-use App\Http\Controllers\LoopController;
+use App\Http\Controllers\insuranceReportOfCustomer;
 
 /*CustomerPayment
 |--------------------------------------------------------------------------
@@ -44,3 +44,4 @@ Route::resource('/insuarance', InsuaranceController::class);
 Route::resource('/payment', CustomerPayment::class);
 Route::resource('/payinsuared', PayInsuared::class);
 Route::resource('/vehiclesPayed', VehiclesPayed::class);
+Route::resource('/customerReport', insuranceReportOfCustomer::class);

@@ -20,7 +20,11 @@ class InsuaranceController extends Controller
         // return response()->json([
         //     'agents' => Insuarance::all(),
         // ], 200);
+
+
         return response()->json([
+
+            // 'number' => rand(10000000, 99999999),
             'insuarance' =>
             DB::table('insuarance')
                 ->select('*')
