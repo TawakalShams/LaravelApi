@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
-    // public function index()
-    // {
-    //     return response()->json([
-    //         'customers' => Customers::all(),
-    //     ], 200);
-    // }
+
     public function index()
     {
         return response()->json([
@@ -22,7 +17,6 @@ class CustomerController extends Controller
             DB::table('vehicles')
                 ->select('*')
                 ->join('customers', 'customers.vehicleid', '=', 'vehicles.vehicleid')
-                // ->join('insuarance', 'insuarance.vehicleid', '=', 'vehicles.vehicleid')
                 ->get()
         ], 200);
     }

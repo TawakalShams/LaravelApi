@@ -16,8 +16,8 @@ class Acident extends Migration
         Schema::create('acident', function (Blueprint $table) {
             //   $table->bigIncrements('acidentid');
             $table->integer('acidentid', 10);
-            $table->integer('customerid')->unique();
-            $table->foreign('customerid')->references('customerid')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('platenumber')->unique();
+            $table->foreign('platenumber')->references('platenumber')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->string('typeofacident');
             $table->string('create_by');
             $table->timestamp('create_at');

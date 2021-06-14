@@ -2,30 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Insuarance; //this is a model
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\VehiclesModel;
+use Illuminate\Support\Facades\DB;
+use App\Models\Insuarance; //this is a model
 
 class insuranceReportOfCustomer extends Controller
 {
-    public function show($insuaranceid)
+    public function show($vehicleId)
     {
-        return response()->json([
-            $id = Insuarance::find($insuaranceid),
-            //  WHERE insuaranceid = '$id'
-
-            DB::select("SELECT * FROM insuarance 
-            JOIN vehicles ON insuarance.vehicleid = insuarance.vehicleid 
-            JOIN  customers ON customers.vehicleid = vehicles.vehicleid 
-            WHERE insuaranceid = '$id'
-            ")
-            //   $id = Insuarance::find($insuaranceid),
-            // DB::table('insuarance')
-            //     ->join('vehicles', 'vehicles.vehicleid', '=', 'insuarance.vehicleid')
-            //     ->join('customers', 'customers.vehicleid', '=', 'vehicles.vehicleid')
-            //     // ->select('insuarance.*')
-            //     // ->where('insuarance.insuaranceid', '=', $id)
-            //     ->get()
-        ], 200);
+        $insurances = VehiclesModel::with(['insurances', 'customers', 'payments'])->findOrFail($vehicleId);
+        return response()->json($insurances);
     }
 }

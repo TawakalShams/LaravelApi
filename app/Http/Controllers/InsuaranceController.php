@@ -134,32 +134,22 @@ class InsuaranceController extends Controller
      */
     public function update(Request $request, $insuaranceid)
     {
-        $validation = Validator::make($request->all(), [
-            'platenumber'  => 'required',
-            'startdate'   => 'required',
-            'enddate'   => 'required',
-            'created_by' => 'required',
-        ]);
 
-        if ($validation->fails()) {
-            return response()->json([
-                'error' => true,
-                'messages'  => $validation->errors(),
-            ], 200);
-        } else {
+        $insuarance = Insuarance::find($insuaranceid);
 
-            $insuarance = Insuarance::find($insuaranceid);
-            $insuarance->insuaredid = $request->input('insuaredid');
-            $insuarance->platenumber = $request->input('platenumber');
-            $insuarance->startdate = $request->input('startdate');
-            $insuarance->enddate = $request->input('enddate');
-            $insuarance->created_by = $request->input('created_by');
-            $insuarance->save();
-
-            return response()->json([
-                'insuarances' => $insuarance,
-            ], 200);
-        }
+        $insuarance->vehicleid = $request->input('vehicleid');
+        $insuarance->color = $request->input('color');
+        $insuarance->seat = $request->input('seat');
+        $insuarance->value = $request->input('value');
+        $insuarance->manufacture = $request->input('manufacture');
+        $insuarance->startdate = $request->input('startdate');
+        $insuarance->enddate = $request->input('enddate');
+        $insuarance->create_by = $request->input('create_by');
+        $insuarance->save();
+        return response()->json([
+            'insuarances' => $insuarance,
+        ], 200);
+        // }
     }
 
     /**

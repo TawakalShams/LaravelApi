@@ -12,7 +12,7 @@ class PayInsuaredModel extends Model
     protected $table = 'payinsuared';
     // public    $primarykey='agentid';
     public $timestamps = false;
-    protected $primaryKey = 'payid';
+    protected $primaryKey = 'insuaranceid';
     protected $fillable = [
         'insuaranceid',
         'amount',

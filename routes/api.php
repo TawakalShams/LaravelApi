@@ -12,6 +12,7 @@ use App\Http\Controllers\CustomerPayment;
 use App\Http\Controllers\PayInsuared;
 use App\Http\Controllers\VehiclesPayed;
 use App\Http\Controllers\insuranceReportOfCustomer;
+use App\Http\Controllers\AcidentController;
 
 /*CustomerPayment
 |--------------------------------------------------------------------------
@@ -45,3 +46,4 @@ Route::resource('/payment', CustomerPayment::class);
 Route::resource('/payinsuared', PayInsuared::class);
 Route::resource('/vehiclesPayed', VehiclesPayed::class);
 Route::resource('/customerReport', insuranceReportOfCustomer::class);
+Route::resource('/acident', AcidentController::class);
